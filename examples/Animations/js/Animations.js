@@ -2,17 +2,17 @@ var Animations = vs.core.createClass ({
 
   /** parent class */
   parent: vs.ui.Application,
-  
+
   initComponent : function () {
     this._super ();
     this.item1 = new vs.ui.TextLabel ({id: 'item1', text: '1'}).init ();
-    this.add (this.item1); 
+    this.add (this.item1);
 
     this.item2 = new vs.ui.TextLabel ({id: 'item2', text: '2'}).init ();
-    this.add (this.item2); 
+    this.add (this.item2);
 
     window.item = this.item3 = new vs.ui.TextLabel ({id: 'item3', text: 'salut'}).init ();
-    this.add (this.item3); 
+    this.add (this.item3);
   },
 
   applicationStarted : function (event) {
@@ -21,7 +21,7 @@ var Animations = vs.core.createClass ({
     this.item2.position = [100, 150];
     this.item3.position = [100, 250];
 
- //   this.test1 ();
+    this.test1 ();
     this.test2 ();
     this.test3 ();
   },
@@ -41,7 +41,7 @@ var Animations = vs.core.createClass ({
         var dx = (end[0]-start[0]) * i, dy = (end[1]-start[1]) * i;
         return [start[0] + dx, start[1] + dy];
       },
-      duration: 1000,
+      duration: 300,
       timing: EASE_OUT,
       endClb : function () { console.log ("End animation") }
     });
@@ -62,7 +62,7 @@ var Animations = vs.core.createClass ({
 });
 
 function loadApplication () {
-  new Animations ({id:"animations"}).init ();
+  new Animations ({id:"animations", layout:vs.ui.View.ABSOLUTE_LAYOUT}).init ();
 
   vs.ui.Application.start ();
 }
