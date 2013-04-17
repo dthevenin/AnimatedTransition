@@ -3,7 +3,7 @@
   <head>
     <meta charset='utf-8'>
     <title>Animated transition</title>
-    <script type="text/javascript" src="http://dthevenin.github.com/javascripts/highlight.pack.js"></script> 
+    <script type="text/javascript" src="http://dthevenin.github.com/javascripts/highlight.pack.js"></script>
     <link rel="stylesheet" href="http://dthevenin.github.com/stylesheets/index.css" media="screen" />
     <link rel="stylesheet" href="http://dthevenin.github.com/stylesheets/vs.css">
     <link rel="stylesheet" href="http://dthevenin.github.com/stylesheets/bender.css">
@@ -44,7 +44,7 @@
             <li>...</li>
           </ol>
         </p>
-        
+
         <br />
         <h3>Authors</h3><p>David Thevenin</p>
         <br />
@@ -60,7 +60,7 @@
       by running:
       </p>
       <pre class="hidden-phone"><code>$ git clone git://github.com/dthevenin/AnimatedTransition</code></pre>
-  
+
       <p>
         get the source code on GitHub : <a href="https://github.com/dthevenin/AnimatedTransition">dthevenin/AnimatedTransition</a>
       </p>
@@ -82,7 +82,8 @@
               <br />
               <br />
               <a href="examples/boulier/index.html" class="button small">Fullscreen version</a>
-            </p>
+              <a href="examples/boulier/playground.html" class="button small">Playground</a>
+           </p>
           </div>
           <div class="text pink">
             <span>Disks Animation</span>
@@ -93,13 +94,14 @@
             <br />
             <br />
             <a href="examples/disk/index.html" class="button small">Fullscreen version</a>
-            </p>
+            <a href="examples/disk/playground.html" class="button small">Playground</a>
+          </p>
           </div>
          </div>
         <p>
-          Code examples are available 
+          Code examples are available
         <a href="https://github.com/dthevenin/AnimatedTransition/tree/master/examples">
-          here</a>. 
+          here</a>.
         </p>
       </section>
 
@@ -117,7 +119,7 @@
   repeatDur: repeatDur
 }).init ();
 </code></pre>
- 
+
      <h3>Pace</h3>
      <h4>Summary</h4>
 <p style="padding: 10px">
@@ -128,7 +130,7 @@
   timing: cubicBezierTransition (0.035, 0.715, 0.96, 0.235)
 }).init ()
 </code></pre>
- 
+
      <h3>Trajectory</h3>
      <h4>Summary</h4>
 <p style="padding: 10px">
@@ -137,7 +139,7 @@
      <h4>Syntax</h4>
 <pre><code class="javascript">var trajectory = new Vector1D ({values: [0, 200, 90, 700]}).init ();
 </code></pre>
- 
+
      <h2>Trajectories</h2>
      <h3>Vector1D</h3>
      <h4>Syntax</h4>
@@ -168,7 +170,7 @@
 <pre><code class="javascript">animateTransition = function (obj, property, options);
 </code></pre>
     <h4>Example</h4>
-    
+
 Rotate an object 'obj' from 0deg to 200deg, 2 times with 10 steps, during 5s (total 10s)
 <pre><code class="javascript">var myAnim = animateTransition (obj, 'rotation', {
   duration: 5000,
@@ -202,7 +204,7 @@ seq.start ();
     </script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <script type="text/javascript" src="http://dthevenin.github.com/javascripts/waypoints.min.js"></script>
-    <script type="text/javascript" src="http://dthevenin.github.com/javascripts/index.js"></script> 
+    <script type="text/javascript" src="http://dthevenin.github.com/javascripts/index.js"></script>
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-15409542-4']);
