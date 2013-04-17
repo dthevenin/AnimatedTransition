@@ -11,14 +11,13 @@
     <meta name="viewport" content="initial-scale=1.0,user-scalable=no">
   </head>
   <body>
-    <header>
+    <header class="small">
       <h1>Animated transition</h1>
       <div class="inner">
         <nav>
           <ul>
-            <li>
-              <a href="#demos" class="">Demos</a>
-            </li>
+            <li><a href="#demos" class="">Demos</a></li>
+            <li><a href="#api" class="">API</a></li>
           </ul>
         </nav>
       </div>
@@ -26,10 +25,29 @@
     <article>
       <section id="intro">
         <h2>Animated Transition</h2>
+        <h3>Introduction</h3>
         <p>
+          Le but du système de transition animée est de:
+          <ol>
+            <li>Proposer un système permettant d'animer des transitions en IHM</li>
+            <li>Faire une API de programmation orientée programmation d'IHM</li>
+            <li>Etre compatible avec le dataflow de VS Toolkit</li>
+            <li>Etre compatible avec le PAR et SEQ de VS Toolkit</li>
+            <li>Etre performant sur mobile</li>
+          </ol>
         </p>
+        <br />
+        <h3>Choix</h3>
         <p>
-        <h3>Authors</h3> David Thevenin
+          <ol>
+            <li>Séparer et formaliser le timming, accéléaration et fonction de transformation</li>
+            <li>...</li>
+          </ol>
+        </p>
+        
+        <br />
+        <h3>Authors</h3><p>David Thevenin</p>
+        <br />
         <h3>Download</h3>
 
       <p>
@@ -53,7 +71,7 @@
         <div class="tiles examples">
           <div class="text blue">
             <span>
-              Balls
+              Newton's cradle
             </span>
             <p>
               ...
@@ -68,8 +86,8 @@
           </div>
           <div class="text pink">
             <span>Disks Animation</span>
+            <br /><br />Based on the <a href="http://peutetre.github.io/Zanimo/" target="Zanimo"> Zanimo rotations demo </a>
             <p>
-            ...
             <br />
             <i>...</i>
             <br />
@@ -84,6 +102,99 @@
           here</a>. 
         </p>
       </section>
+
+
+    <section id="api" class="hidden-phone">
+     <h2>Main Objects</h2>
+     <h3>Chronometer</h3>
+     <h4>Summary</h4>
+<p style="padding: 10px">
+</p>
+     <h4>Syntax</h4>
+<pre><code class="javascript">var chrono = new Chronometer ({
+  duration: dur,
+  steps: steps,
+  repeatDur: repeatDur
+}).init ();
+</code></pre>
+ 
+     <h3>Pace</h3>
+     <h4>Summary</h4>
+<p style="padding: 10px">
+
+</p>
+     <h4>Syntax</h4>
+<pre><code class="javascript">var pace = new Pace ({
+  timing: cubicBezierTransition (0.035, 0.715, 0.96, 0.235)
+}).init ()
+</code></pre>
+ 
+     <h3>Trajectory</h3>
+     <h4>Summary</h4>
+<p style="padding: 10px">
+
+</p>
+     <h4>Syntax</h4>
+<pre><code class="javascript">var trajectory = new Vector1D ({values: [0, 200, 90, 700]}).init ();
+</code></pre>
+ 
+     <h2>Trajectories</h2>
+     <h3>Vector1D</h3>
+     <h4>Syntax</h4>
+<pre><code class="javascript">var trajectory = new Vector1D ({values: [0, 200, 90, 700]}).init ();
+</code></pre>
+
+     <h3>Vector2D</h3>
+     <h4>Syntax</h4>
+<pre><code class="javascript">var trajectory = new Vector2D ({values: [[0,0], [220, -55], [200, 50], [0, 0]]}).init ()
+</code></pre>
+
+     <h3>Circular2D</h3>
+     <h4>Syntax</h4>
+<pre><code class="javascript">var trajectory = new Circular2D ({
+  center: [0,-200],
+  values: [45, 35, 45]
+}).init ();
+</code></pre>
+
+     <h2>Helpers</h2>
+     <h3>animateTransition (temp API)</h3>
+
+     <h4>Summary</h4>
+<p style="padding: 10px">
+
+</p>
+     <h4>Syntax</h4>
+<pre><code class="javascript">animateTransition = function (obj, property, options);
+</code></pre>
+    <h4>Example</h4>
+    
+Rotate an object 'obj' from 0deg to 200deg, 2 times with 10 steps, during 5s (total 10s)
+<pre><code class="javascript">var myAnim = animateTransition (obj, 'rotation', {
+  duration: 5000,
+  pace: Pace.getLinearPace (),
+  steps: 10,
+  repeatDur: 2,
+  trajectory: new Vector1D ({values: [0, 200]}).init ()
+});
+</code></pre>
+
+     <h2>Use Task_PAR and Task_SEQ</h2>
+     <h4>Syntax</h4>
+<pre><code class="javascript">
+var anim2 = animateTransition (...), ...;
+
+// anim3 will start when anim1 and anim2 will finish
+// anim1 and anim2 will start at same time
+
+var seq = vs.seq (vs.par (anim1, anim2), anim3);
+seq.start ();
+
+</code></pre>
+
+    </section>
+
+
     </article>
     <script type="text/javascript">
       hljs.tabReplace = '      ';
