@@ -58,7 +58,7 @@ clean:
 AnimatedTransition: lib/animatedtransition.js
 
 lib/animatedtransition.js: 
-	$(CAT) src/newMainloop.js >> $@
+	$(CAT) src/vst_extension.js >> $@
 	$(CAT) src/CubicBezier.js >> $@
 	$(CAT) src/Chronometer.js >> $@
 	$(CAT) src/Pace.js >> $@
