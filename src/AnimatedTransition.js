@@ -37,7 +37,7 @@ exports.animateTransition = function (obj, property, options)
   var pace = animOptions.pace;
   var traj = animOptions.trajectory;
 
-  chrono.start (function (i) {
+  chrono.__clb = function (i) {
     pace.tickIn = i;
     pace.compute ();
     
@@ -45,7 +45,7 @@ exports.animateTransition = function (obj, property, options)
     traj.compute ();
     
     obj [property] = traj.out;
-  });
+  }
   
   return chrono;
 }
