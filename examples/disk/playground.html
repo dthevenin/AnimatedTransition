@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Newton's cradle</title>
+
+    <script src="../js/codemirror.js"></script>
+    <script src="../js/javascript.js"></script>
+    <script src="../js/css.js"></script>
+    <script src="../js/playground.js"></script>
+    <link rel="stylesheet" href="../css/codemirror.css">
+    <link rel="stylesheet" href="../css/vsd.css">
+    <link rel="stylesheet" type="text/css" href="../css/ex_index.css">
+
+    <script>
+      window.app_docs = [
+        {url: 'Disk.js', type:JS_DOC, data:''},
+        {url: 'Disk.css', type:CSS_DOC, data:''}
+      ]
+    </script>
+
+  </head>
+  <body>
+    <iframe id="playground"></iframe>
+
+    <a class="button" href="../../index.html">Back</a>
+    <button class="button" onclick="runApplication ();">Run</button>
+    <select id="files" onchange="changeDocument (event)"></select>
+    <textarea id="code" name="code"></textarea>
+  </body>
+</html>
