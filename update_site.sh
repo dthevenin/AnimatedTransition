@@ -4,10 +4,12 @@ mkdir -p tmp/
 git clone https://github.com/dthevenin/AnimatedTransition.git tmp
 rm -rf lib
 rm -rf examples
-cd tmp
-./update_lib.sh
-cd ..
 mv tmp/lib .
 mv tmp/examples .
-mv tmp/lib_ext .
+rm -rf tmp
+
+mkdir -p tmp/
+git clone https://github.com/vinisketch/VSToolkit.git tmp
+rm -rf lib_ext
+mv tmp/lib lib_ext
 rm -rf tmp
