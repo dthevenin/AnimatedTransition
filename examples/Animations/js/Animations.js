@@ -14,59 +14,67 @@ var Animations = vs.core.createClass ({
     this.item3 = new vs.ui.TextLabel ({id: 'item3', text: '3'}).init ();
     this.add (this.item3);
 
-    window.item = this.item4 = new vs.ui.TextLabel ({id: 'item4', text: 'salut'}).init ();
+    this.item4 = new vs.ui.TextLabel ({id: 'item4', text: 'salut'}).init ();
     this.add (this.item4);
+
+
+    this.button = new vs.ui.Button ({
+      text: 'start',
+      size : [60, 30]
+    }).init ();
+    this.add (this.button);
+    
+    this.button.bind ('select', this, this.startAnim);
   },
 
   applicationStarted : function (event) {
-
-    this.item1.position = [100, 50];
-    this.item2.position = [100, 150];
-    this.item3.position = [100, 250];
-    this.item4.position = [100, 350];
-
+    this.item1.position = [20, 20];
+    this.item2.position = [20, 120];
+    this.item3.position = [20, 220];
+    this.item4.position = [20, 320];
+  },
+  
+  startAnim : function ()
+  {
     this.test1 ();
     this.test2 ();
     this.test3 ();
-    this.test4 ();
+//    this.test4 ();
   },
 
   test1 : function ()
   {
-    var translation = new vs.fx.TranslateAnimation (200, 200, 0);
-    translation.duration = '300ms';
+    var translation = new vs.fx.TranslateAnimation (200, 50, 0);
+    translation.duration = '1000ms';
     translation.timing = vs.fx.Animation.EASE_OUT;
     translation.process (this.item1);
   },
 
   test2 : function ()
   {
-     animateTransition (this.item2, 'position', {
-      function : function (start, end, i) {
-        var dx = (end[0]-start[0]) * i, dy = (end[1]-start[1]) * i;
-        return [start[0] + dx, start[1] + dy];
-      },
-      duration: 300,
-      timing: EASE_OUT,
-      endClb : function () { console.log ("End animation") }
+     animateTransition (this.item2, 'rotation', {
+      duration: 5000,
+      pace: Pace.getLinearPace (),
+ //     steps: 10,
+ //     repeatDur: 2,
+      trajectory: new Vector1D ({values: [0, 200, 90, 700]}).init ()
     });
-
-    this.item2.position = [300, 350];
   },
 
   test3 : function ()
   {
-     animateTransition (this.item3, 'translation', {
-      function : function (start, end, i) {
-        var dx = (end[0]-start[0]) * i, dy = (end[1]-start[1]) * i;
-        return [start[0] + dx, start[1] + dy];
-      },
-      duration: 300,
-      timing: EASE_OUT,
-      endClb : function () { console.log ("End animation") }
-    });
-
-    this.item3.translation = [200, 200];
+    animateTransition (
+      this.item3, 
+      'translation',
+      {
+        duration: 3000,
+        pace: Pace.getEaseOutPace (),
+ //       steps: 10,
+        repeatDur: 2,
+        trajectory: new Vector2D ({values: [[0,0], [220, -55], [200, 50], [0, 0]]}).init ()
+      }
+    );
+    
   },
 
   test4 : function ()
@@ -74,10 +82,9 @@ var Animations = vs.core.createClass ({
     animateTransition (this.item4, 'text', {
       function : STRING_ANIMATION_AIRPORT,
       duration: 5000,
-      timing: EASE_OUT
-    });
-
-    this.item4.text = "comment vous allez";
+      pace: Pace.getEaseOutPace ()
+    },
+    "comment allez-vous");
   }
 });
 
