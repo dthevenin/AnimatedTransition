@@ -73,7 +73,11 @@ var Chronometer = vs.core.createClass ({
         );
       }
       else
+      {
         this._state = vs.core.Task.STOPPED;
+        if (this.delegate && this.delegate.taskDidEnd)
+        { this.delegate.taskDidEnd (this); }
+      }
     }
     else {
       if (this._steps === 0) vs.scheduleAction (this._clock.bind (this));
@@ -130,7 +134,11 @@ var Chronometer = vs.core.createClass ({
         vs.scheduleAction (this._start_steps.bind (this));
       }
       else
+      {
         this._state = vs.core.Task.STOPPED;
+        if (this.delegate && this.delegate.taskDidEnd)
+        { this.delegate.taskDidEnd (this); }
+      }
     }
     else {
       this._tick = step / (this._steps - 1);
