@@ -113,3 +113,80 @@ var Vector2D = vs.core.createClass ({
     this.propagateChange ('out');
   }
 });
+
+var Circular2D = vs.core.createClass ({
+
+  parent: Trajectory,
+  
+  _center: null,
+  _values: null,
+  _out: 0,
+  
+  properties : {
+    center: {
+      set: function (v)
+      {
+        if (!vs.util.isArray (v)) return;
+        if (v.length !== 2) return;
+        
+        this._center = v.slice ();
+      }
+    },
+    
+    values: {
+      set: function (v)
+      {
+        if (!vs.util.isArray (v)) return;
+        if (v.length < 1) return;
+        
+        this._values = v.slice ();
+      }
+    },
+    
+    out: vs.core.Object.PROPERTY_OUT
+  },
+  
+  constructor : function (config)
+  {
+    this._super (config);
+    this._values = [0, 0];
+    this._center = [0, 0];
+  },
+  
+  compute: function ()
+  {
+    if (!vs.util.isNumber (this._tick)) return;
+    
+    var
+      angle, values = this._values, 
+      nb_values = values.length - 1, // int [0, n]
+      ti = this._tick * nb_values, // float [0, n]
+      index = Math.floor (ti), // int [0, n]
+      d = ti - index; // float [0, 1]
+      
+    if (this._tick === 0) angle = values [0];
+    else if (this._tick === 1) angle = values [nb_values];
+    else
+    {
+      var v1 = values [index];
+      var v2 = values [index + 1];
+      angle = v1 + (v2 - v1) * d;
+    }
+
+    var 
+      cx = this._center [0],
+      cy = this._center [1],
+      radius = Math.sqrt (cx * cx + cy * cy);
+    
+    // Deg => Grad
+    angle = 2 * Math.PI * angle / 180;
+    var x = radius * Math.cos (angle) + cx,
+      x = Math.round(x * 1000) / 1000;
+    var y = radius * Math.sin (angle) + cy,
+      y = Math.round(y * 1000) / 1000;
+        
+    this._out = [x, y];
+    
+    this.propagateChange ('out');
+  }
+});
