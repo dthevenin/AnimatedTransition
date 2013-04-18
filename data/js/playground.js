@@ -45,13 +45,7 @@ function updatePreview ()
   
   setTimeout (function () {
     iframe.contentWindow.loadApplication ();
-  }, 500);
-
-//   var script = preview.createElement ('script');
-//   script.innerHTML = "loadApplication ();";
-//   script.setAttribute ("type", "text/javascript");
-//   if (!preview.head) { preview.head = preview.querySelector ('head'); }
-//   preview.head.appendChild (script);
+  }, 0);
 }
 
 function loadApplication ()
