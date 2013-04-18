@@ -4,9 +4,10 @@
 
 exports.AnimationDefaultOption = {
   duration: 300,
+  begin: 0,
   timing: Pace.getEaseInOutPace (),
   steps: 0,
-  repeatDur: 1,
+  repeat: 1,
   startClb: null,
   endClb: null
 }
