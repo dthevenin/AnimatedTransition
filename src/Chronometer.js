@@ -67,10 +67,7 @@ var Chronometer = vs.core.createClass ({
       if (this.__repeat_dur > 1)
       {
         this.__repeat_dur --;
-        vs.scheduleAction (
-          this._start_clock.bind (this),
-          this._duration / (this._steps)
-        );
+        vs.scheduleAction (this._start_clock.bind (this));
       }
       else
       {
