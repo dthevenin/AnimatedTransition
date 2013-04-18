@@ -26,6 +26,8 @@ var Chronometer = vs.core.createClass ({
   _repeat: 1,
   _tick: 0,
   __time_decl: 0,
+  __pause_time: 0,
+  __end_time: 0,
   
   properties: {
     duration: vs.core.Object.PROPERTY_IN,
@@ -74,6 +76,7 @@ var Chronometer = vs.core.createClass ({
     {
       var begin = this._begin || 0;
       this.__time_decl = 0;
+      this.__pause_time = 0;
     
       // manage delayed clock
       if (begin > 0)
@@ -135,7 +138,7 @@ var Chronometer = vs.core.createClass ({
     }
     else {
       // schedule a new tick
-      if (this._steps === 0) vs.scheduleAction (this._clock.bind (this));
+      vs.scheduleAction (this._clock.bind (this));
       this._tick = (currTime - this.__start_time) / this._duration;
       this.propagateChange ('tick');
       if (this.__clb) this.__clb (this._tick);
@@ -146,10 +149,13 @@ var Chronometer = vs.core.createClass ({
    * @function
    * @private
    */
-  _start_clock: function (begin)
+  _start_clock: function ()
   {
     if (this._state === vs.core.Task.PAUSED)
     {
+      var pause_dur = Date.now () - this.__pause_time;
+      this.__start_time += pause_dur;
+      this.__end_time += pause_dur;
       this._state = vs.core.Task.STARTED;
       vs.scheduleAction (this._clock.bind (this));
       return;
@@ -200,6 +206,8 @@ var Chronometer = vs.core.createClass ({
       this._tick = step / (this._steps - 1);
       this.propagateChange ('tick');
       if (this.__clb) this.__clb (this._tick);
+      var step_dur = this._duration / this._steps
+      vs.scheduleAction (this._step.bind (this), step_dur);
     }
   },
   
@@ -209,16 +217,13 @@ var Chronometer = vs.core.createClass ({
    */
   _start_steps: function ()
   {
-    // @TODO finir la gestion du pause / stop pour animation par step
-    
-//     if (this._state === vs.core.Task.STARTED) return;
-//     if (this._state === vs.core.Task.PAUSED)
-//     {
-//       
-//       this._state = vs.core.Task.STARTED;
-// //       vs.scheduleAction (this._clock.bind (this));
-// //       return;
-//     }
+    // step clock implement a simplistic time management and pause.
+    if (this._state === vs.core.Task.PAUSED)
+    {
+      this._state = vs.core.Task.STARTED;
+      vs.scheduleAction (this._step.bind (this));
+      return;
+    }
 
     if (vs.util.isFunction (this.__param)) this.__clb = this.__param;
 
@@ -231,10 +236,7 @@ var Chronometer = vs.core.createClass ({
     this.__steps = this._steps - 1 - Math.floor (this.__time_decl / step_dur);
     this.__time_decl = 0;
     
-    for (var i = 0; i <= this.__steps; i++)
-    {
-      vs.scheduleAction (this._step.bind (this), (i + 1) * step_dur);
-    }
+    vs.scheduleAction (this._step.bind (this), step_dur);
   },
 
   /**
@@ -248,6 +250,7 @@ var Chronometer = vs.core.createClass ({
   stop: function ()
   {
     this._state = vs.core.Task.STOPPED;
+    this.__pause_time = 0;
   },
 
   /**
@@ -260,6 +263,8 @@ var Chronometer = vs.core.createClass ({
    */
   pause: function ()
   {
+    if (!this._state === vs.core.Task.STARTED) return;
     this._state = vs.core.Task.PAUSED;
+    this.__pause_time = Date.now ();
   }
 });
