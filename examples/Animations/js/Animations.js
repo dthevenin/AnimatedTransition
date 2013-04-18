@@ -48,7 +48,7 @@ var Animations = vs.core.createClass ({
       duration: 5000,
       pace: Pace.getLinearPace (),
  //     steps: 10,
- //     repeatDur: 2,
+ //     repeat: 2,
       trajectory: new Vector1D ({values: [0, 200, 90, 700]}).init ()
     });
 
@@ -57,9 +57,10 @@ var Animations = vs.core.createClass ({
       'translation',
       {
         duration: 3000,
+        begin: -500,
         pace: Pace.getEaseOutPace (),
-        steps: 10,
-        repeatDur: 2,
+ //       steps: 10,
+        repeat: 2,
         trajectory: new Vector2D ({values: [[0,0], [220, -55], [200, 50], [0, 0]]}).init ()
       }
     );
@@ -68,12 +69,12 @@ var Animations = vs.core.createClass ({
       duration: 5000,
       pace: Pace.getLinearPace (),
  //     steps: 10,
- //     repeatDur: 2,
+ //     repeat: 2,
       trajectory: new StringTrajectory ({values: ["salut", "comment allez-vous"]}).init ()
     });
 
     
-    this.seq = vs.seq (this.anim2, this.anim3, this.anim2);
+    this.seq = vs.seq (this.anim3, this.anim2);
   },
 
   startAnim : function ()
