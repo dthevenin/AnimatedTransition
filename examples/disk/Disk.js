@@ -13,7 +13,7 @@ var Animations = vs.core.createClass ({
       var anim = animateTransition (item, 'rotation', {
         duration: dur,
         pace: Pace.getEaseInOutPace (),
-        repeatDur: 5,
+        repeat: 5,
         trajectory: new Vector1D ({values: [0, 190, 70, -45, -125, -60, 0, 45, 0]}).init ()
       });
 
