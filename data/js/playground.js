@@ -19,12 +19,8 @@ function loadDocument (path)
 function updatePreview ()
 {
   var iframe = document.getElementById ('playground');
-  var html = loadDocument ('index.html')
+  iframe.contentWindow.vs.ui.Application.stop ()
   var preview =  iframe.contentDocument ||  iframe.contentWindow.document;
-
-  preview.open ();
-  preview.write (html);
-  preview.close ();
 
   for (var i = 0; i < app_docs.length; i++)
   {
@@ -46,12 +42,16 @@ function updatePreview ()
       preview.head.appendChild (css_style);
     }
   }
+  
+  setTimeout (function () {
+    iframe.contentWindow.loadApplication ();
+  }, 500);
 
-  var script = preview.createElement ('script');
-  script.innerHTML = "loadApplication ();";
-  script.setAttribute ("type", "text/javascript");
-  if (!preview.head) { preview.head = preview.querySelector ('head'); }
-  preview.head.appendChild (script);
+//   var script = preview.createElement ('script');
+//   script.innerHTML = "loadApplication ();";
+//   script.setAttribute ("type", "text/javascript");
+//   if (!preview.head) { preview.head = preview.querySelector ('head'); }
+//   preview.head.appendChild (script);
 }
 
 function loadApplication ()
@@ -68,7 +68,8 @@ function loadApplication ()
     select.appendChild (option);
   }
 
-  updatePreview ();
+  var iframe = document.getElementById ('playground');
+  iframe.src = "index.html"
 }
 
 function runApplication ()
