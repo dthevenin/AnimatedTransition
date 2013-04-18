@@ -61,6 +61,8 @@ var Chronometer = vs.core.createClass ({
    */
   start: function (param)
   {
+    if (this._state === vs.core.Task.STARTED) return;
+
     // schedule a clock cycle
     function _start ()
     {
