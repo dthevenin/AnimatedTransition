@@ -1,7 +1,7 @@
 ##############################################################
 ##                    COPYRIGHT NOTICE
 ##
-##  Copyright (C) 2009-2012. David Thevenin, ViniSketch SARL (c), and
+##  Copyright (C) 2009-2013. David Thevenin, ViniSketch (c), and
 ##  contributors. All rights reserved
 ##
 ##  This program is free software: you can redistribute it and/or modify
