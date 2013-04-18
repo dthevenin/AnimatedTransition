@@ -1,3 +1,21 @@
+/**
+ * Copyright (C) 2009-2013. David Thevenin, ViniSketch (c), and 
+ * contributors. All rights reserved
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 var Animations = vs.core.createClass ({
 
   /** parent class */
@@ -48,7 +66,7 @@ var Animations = vs.core.createClass ({
       duration: 5000,
       pace: Pace.getLinearPace (),
  //     steps: 10,
- //     repeatDur: 2,
+ //     repeat: 2,
       trajectory: new Vector1D ({values: [0, 200, 90, 700]}).init ()
     });
 
@@ -57,9 +75,10 @@ var Animations = vs.core.createClass ({
       'translation',
       {
         duration: 3000,
+        begin: -1000,
         pace: Pace.getEaseOutPace (),
-        steps: 10,
-        repeatDur: 2,
+        steps: 50,
+        repeat: 2,
         trajectory: new Vector2D ({values: [[0,0], [220, -55], [200, 50], [0, 0]]}).init ()
       }
     );
@@ -68,25 +87,25 @@ var Animations = vs.core.createClass ({
       duration: 5000,
       pace: Pace.getLinearPace (),
  //     steps: 10,
- //     repeatDur: 2,
+ //     repeat: 2,
       trajectory: new StringTrajectory ({values: ["salut", "comment allez-vous"]}).init ()
     });
 
     
-    this.seq = vs.seq (this.anim2, this.anim3, this.anim2);
+    this.seq = vs.seq (this.anim3, this.anim2);
   },
 
   startAnim : function ()
   {
-    this.test1 ();
-    this.anim2.start ();
+//    this.test1 ();
+//    this.anim2.start ();
     this.anim3.start ();
-    this.anim4.start ();
+//    this.anim4.start ();
   },
   
   pauseAnim : function ()
   {
-    this.anim2.pause ();
+//    this.anim2.pause ();
     this.anim3.pause ();
 //    this.anim4.pause ();
   },
