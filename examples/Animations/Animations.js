@@ -75,9 +75,9 @@ var Animations = vs.core.createClass ({
       'translation',
       {
         duration: 3000,
-        begin: -500,
+        begin: -1000,
         pace: Pace.getEaseOutPace (),
- //       steps: 10,
+        steps: 50,
         repeat: 2,
         trajectory: new Vector2D ({values: [[0,0], [220, -55], [200, 50], [0, 0]]}).init ()
       }
@@ -97,15 +97,15 @@ var Animations = vs.core.createClass ({
 
   startAnim : function ()
   {
-    this.test1 ();
-    this.anim2.start ();
+//    this.test1 ();
+//    this.anim2.start ();
     this.anim3.start ();
-    this.anim4.start ();
+//    this.anim4.start ();
   },
   
   pauseAnim : function ()
   {
-    this.anim2.pause ();
+//    this.anim2.pause ();
     this.anim3.pause ();
 //    this.anim4.pause ();
   },
