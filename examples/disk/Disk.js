@@ -20,7 +20,7 @@ var Animations = vs.core.createClass ({
       return anim;
     }
     
-//    vs.seq (
+//    var anim = vs.seq (
     var anim = vs.par (
       createAnime ("disk0"),
       createAnime ("disk1"),
