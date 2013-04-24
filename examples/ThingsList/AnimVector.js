@@ -29,7 +29,6 @@ var AnimVector = vs.core.createClass ({
     translations: {
       set: function (v) {
         if (!vs.util.isArray (v) || v.length < 1) return;
-        
         this._translations = v.slice ();
       }
     },
@@ -39,7 +38,6 @@ var AnimVector = vs.core.createClass ({
     scalings: {
       set: function (v) {
         if (!vs.util.isArray (v) || v.length < 1) return;
-        
         this._scalings = v.slice ();
       }
     },

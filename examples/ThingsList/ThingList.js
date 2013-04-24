@@ -95,18 +95,14 @@ var ThingList = vs.core.createClass ({
     this.hide_list_anim = animateTransition (this.list_view, 'translation', {
       duration: 300,
       pace: Pace.getEaseInPace (),
-      trajectory: new Vector2D ({
-        values: [[0,0], [0, size[1]]]
-      }).init ()
+      trajectory: new Vector2D ({ values: [[0,0], [0, size[1]]] }).init ()
     });
 
     // Show list animation
     this.show_list_anim = animateTransition (this.list_view, 'translation', {
       duration: 300,
       pace: Pace.getEaseInPace (),
-      trajectory: new Vector2D ({
-        values: [[0, size[1]], [0,0]]
-      }).init ()
+      trajectory: new Vector2D ({ values: [[0, size[1]], [0,0]] }).init ()
     });
   }
 });
