@@ -34,10 +34,10 @@ var Pace = vs.core.createClass ({
   {
     this._super ();
     
-    this.compute ();
+    this.propertiesDidChange ();
   },
   
-  compute : function ()
+  propertiesDidChange : function ()
   {
     if (this._timing)
     {

@@ -58,10 +58,10 @@ exports.animateTransition = function (obj, property, options)
 
   chrono.__clb = function (i) {
     pace.tickIn = i;
-    pace.compute ();
+    pace.propertiesDidChange ();
     
     traj.tick = pace.tickOut;
-    traj.compute ();
+    traj.propertiesDidChange ();
     
     obj [property] = traj.out;
     obj.propertyChange ();
@@ -87,10 +87,10 @@ exports.animateTransitionBis = function (obj, srcs, targets, options)
 
   chrono.__clb = function (i) {
     pace.tickIn = i;
-    pace.compute ();
+    pace.propertiesDidChange ();
     
     traj.tick = pace.tickOut;
-    traj.compute ();
+    traj.propertiesDidChange ();
     
     for (var i = 0; i < srcs.length; i++) { obj [targets[i]] = traj [srcs[i]]; }
     obj.propertyChange ();

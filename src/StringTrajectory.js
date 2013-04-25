@@ -51,7 +51,7 @@ var StringTrajectory = vs.core.createClass ({
     this._values = [];
   },
   
-  compute: function ()
+  propertiesDidChange: function ()
   {
     if (!vs.util.isNumber (this._tick)) return;
     

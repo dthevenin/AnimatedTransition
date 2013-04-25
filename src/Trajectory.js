@@ -55,7 +55,7 @@ var Vector1D = vs.core.createClass ({
     this._values = [];
   },
   
-  compute: function ()
+  propertiesDidChange: function ()
   {
     if (!vs.util.isNumber (this._tick)) return;
 
@@ -105,7 +105,7 @@ var Vector2D = vs.core.createClass ({
     this._values = [];
   },
   
-  compute: function ()
+  propertiesDidChange: function ()
   {
     if (!vs.util.isNumber (this._tick)) return;
     
@@ -170,7 +170,7 @@ var Circular2D = vs.core.createClass ({
     this._center = [0, 0];
   },
   
-  compute: function ()
+  propertiesDidChange: function ()
   {
     if (!vs.util.isNumber (this._tick)) return;
     
