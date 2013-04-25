@@ -64,6 +64,7 @@ exports.animateTransition = function (obj, property, options)
     traj.compute ();
     
     obj [property] = traj.out;
+    obj.propertyChange ();
   }
   
   return chrono;
@@ -91,8 +92,8 @@ exports.animateTransitionBis = function (obj, srcs, targets, options)
     traj.tick = pace.tickOut;
     traj.compute ();
     
-    for (var i = 0; i < srcs.length; i++)
-    obj [targets[i]] = traj [srcs[i]];
+    for (var i = 0; i < srcs.length; i++) { obj [targets[i]] = traj [srcs[i]]; }
+    obj.propertyChange ();
   }
   
   return chrono;
