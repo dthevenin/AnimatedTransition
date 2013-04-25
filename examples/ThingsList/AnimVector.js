@@ -91,7 +91,7 @@ var AnimVector = vs.core.createClass ({
     }
   },
   
-  compute: function ()
+  propertiesDidChange: function ()
   {
     if (!vs.util.isNumber (this._tick)) return;
     
