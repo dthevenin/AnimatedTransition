@@ -127,7 +127,7 @@ var Chronometer = vs.core.createClass ({
       {
         this.__repeat_dur --;
         // schedule a new clock cycle
-        vs.scheduleAction (this._start_clock.bind (this));
+        vs.scheduleAction (this._start_clock.bind (this), vs.ON_NEXT_FRAME);
       }
       else
       {
@@ -138,7 +138,7 @@ var Chronometer = vs.core.createClass ({
     }
     else {
       // schedule a new tick
-      vs.scheduleAction (this._clock.bind (this));
+      vs.scheduleAction (this._clock.bind (this), vs.ON_NEXT_FRAME);
       this._tick = (currTime - this.__start_time) / this._duration;
       this.propagateChange ('tick');
       if (this.__clb) this.__clb (this._tick);
@@ -193,7 +193,7 @@ var Chronometer = vs.core.createClass ({
       if (this.__repeat_dur > 1)
       {
         this.__repeat_dur --;
-        vs.scheduleAction (this._start_steps.bind (this));
+        vs.scheduleAction (this._start_steps.bind (this), vs.ON_NEXT_FRAME);
       }
       else
       {
