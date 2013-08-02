@@ -7,7 +7,7 @@
   border-radius: 25px;
   background:
     url(assets/wood.png),
-    -webkit-radial-gradient(rgb(80, 64, 49), rgb(15, 15, 15));
+    radial-gradient(rgb(80, 64, 49), rgb(15, 15, 15));
     
   box-shadow: 6px 2px 15px rgba(0,0,0,0.5);
 }
