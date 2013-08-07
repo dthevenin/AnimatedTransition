@@ -51,7 +51,6 @@ COMPILE_LESS = lessc
 
 all :: clean AnimatedTransition
 
-
 clean:
 	$(RM) lib/animatedtransition.js
 	
@@ -64,3 +63,6 @@ lib/animatedtransition.js:
 	$(CAT) src/Pace.js >> $@
 	$(CAT) src/Trajectory.js >> $@
 	$(CAT) src/AnimatedTransition.js >> $@
+
+update: 
+	git submodule -q foreach git pull -q origin master

@@ -1,0 +1,3 @@
+[submodule "ext/VSToolkit"]
+	path = ext/VSToolkit
+	url = git@github.com:vinisketch/VSToolkit.git
