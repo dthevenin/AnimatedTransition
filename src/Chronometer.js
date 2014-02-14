@@ -111,7 +111,7 @@ var Chronometer = vs.core.createClass ({
   
   __setTick : function (v) {
     if (this._pace && this._pace._timing) {
-      this._tick = this._pace._timing._timing ();
+      this._tick = this._pace._timing ();
     }
     else this._tick = v;
   },
