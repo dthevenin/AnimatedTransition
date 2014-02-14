@@ -44,6 +44,7 @@ var Chronometer = vs.core.createClass ({
       }
     },
     repeat: vs.core.Object.PROPERTY_IN,
+    pace: vs.core.Object.PROPERTY_IN,
     tick: vs.core.Object.PROPERTY_OUT
   },
   
@@ -88,7 +89,7 @@ var Chronometer = vs.core.createClass ({
       // manage ended clock before started
       if (-begin > this._repeat * this._duration)
       {
-        this._tick = 1;
+        this.__setTick (1);
         this.propagateChange ('tick');
         if (this.__clb) this.__clb (this._tick);
 
@@ -107,6 +108,13 @@ var Chronometer = vs.core.createClass ({
     
     _start.call (this);
   },
+  
+  __setTick : function (v) {
+    if (this._pace && this._pace._timing) {
+      this._tick = this._pace._timing._timing ();
+    }
+    else this._tick = v;
+  },
 
   /**
    * @function
@@ -120,7 +128,7 @@ var Chronometer = vs.core.createClass ({
     
     if (currTime >= this.__end_time)
     {
-      this._tick = 1;
+      this.__setTick (1);
       this.propagateChange ('tick');
       if (this.__clb) this.__clb (this._tick);
       if (this.__repeat_dur > 1)
@@ -139,7 +147,7 @@ var Chronometer = vs.core.createClass ({
     else {
       // schedule a new tick
       vs.scheduleAction (this._clock.bind (this), vs.ON_NEXT_FRAME);
-      this._tick = (currTime - this.__start_time) / this._duration;
+      this__setTick(currTime - this.__start_time) / this._duration;
       this.propagateChange ('tick');
       if (this.__clb) this.__clb (this._tick);
     }
@@ -167,7 +175,7 @@ var Chronometer = vs.core.createClass ({
     if (vs.util.isFunction (this.__param)) this.__clb = this.__param;
 
     this._state = vs.core.Task.STARTED;
-    this._tick = 0;
+    this.__setTick (0);
     this.propagateChange ('tick');
     if (this.__clb) this.__clb (this._tick);
     
@@ -187,7 +195,7 @@ var Chronometer = vs.core.createClass ({
 
     if (step === this._steps)
     {
-      this._tick = 1;
+      this.__setTick (1);
       this.propagateChange ('tick');
       if (this.__clb) this.__clb (this._tick);
       if (this.__repeat_dur > 1)
@@ -203,7 +211,7 @@ var Chronometer = vs.core.createClass ({
       }
     }
     else {
-      this._tick = step / (this._steps - 1);
+      this.__setTick (step / (this._steps - 1));
       this.propagateChange ('tick');
       if (this.__clb) this.__clb (this._tick);
       var step_dur = this._duration / this._steps
@@ -228,7 +236,7 @@ var Chronometer = vs.core.createClass ({
     if (vs.util.isFunction (this.__param)) this.__clb = this.__param;
 
     this._state = vs.core.Task.STARTED;
-    this._tick = 0;
+    this.__setTick (0);
     this.propagateChange ('tick');
     if (this.__clb) this.__clb (this._tick);
     
