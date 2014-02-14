@@ -75,3 +75,9 @@ Pace.getEaseOutInPace = function () {
 }
 
 Pace.getLinearPace = function () { return new Pace ().init (); }
+
+Pace.getInvertLinearPace = function () {
+  return new Pace ({
+    timing: function (t) { return 1 - t; }
+  }).init ();
+}
