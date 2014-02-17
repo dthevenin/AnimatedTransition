@@ -51,7 +51,7 @@ var Animations = vs.core.createClass ({
     
    var seq = vs.seq (this.anim1, this.anim2);
    seq.delegate = {
-    taskDidEnd: function () {seq.start ()}
+     taskDidEnd: function () {seq.start ()}
    }
    seq.start ();
   },
