@@ -4,11 +4,10 @@
  * 
  * Created by David Thevenin, http://www.vinisketch.fr
  */
+var exports = vs;
 
-var exports = window;
+(function (exports) {
 
-(function()
-{
   // port of webkit cubic bezier handling by http://www.netzgesta.de/dev/
   /*!
    *  Copyright (c) 2006 Apple Computer, Inc. All rights reserved.
@@ -79,7 +78,7 @@ var exports = window;
     return solve (t);
   }
   
-   /**
+  /**
    *  cubicBezierTransition(x1, y1, x2, y2) -> Function
    *
    *  Generates a transition easing function that is compatible
@@ -89,9 +88,8 @@ var exports = window;
    *  The W3C has more information about 
    *  <a href="http://www.w3.org/TR/css3-transitions/#transition-timing-function_tag">
    *  CSS3 transition timing functions</a>.
-  **/
-  exports.cubicBezierTransition = function (x1, y1, x2, y2)
-  {
+   **/
+  exports.cubicBezierTransition = function (x1, y1, x2, y2) {
     return (function(pos) {return CubicBezier (pos,x1,y1,x2,y2);});
   }
-})();
+})(exports);

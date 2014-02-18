@@ -18,13 +18,26 @@
 
 var Trajectory = vs.core.createClass ({
 
-  parent: vs.core.Task,
-
   _calcule_mode : 0,
   
   properties : {
     calculeMode: vs.core.Object.PROPERTY_IN,
     tick: vs.core.Object.PROPERTY_IN
+  },
+
+  initComponent: function () {
+    this._super ();
+
+    this.propertiesDidChange ();
+  },
+  
+  compute: function () {
+    return false;
+  },
+
+  propertiesDidChange: function ()
+  {
+    if (this.compute ()) this.propagateChange ('out');
   }
 });
 
@@ -55,9 +68,9 @@ var Vector1D = vs.core.createClass ({
     this._values = [];
   },
   
-  propertiesDidChange: function ()
+  compute: function ()
   {
-    if (!vs.util.isNumber (this._tick)) return;
+    if (!vs.util.isNumber (this._tick)) return false;
 
     var
       nb_values = this._values.length - 1, // int [0, n]
@@ -74,7 +87,7 @@ var Vector1D = vs.core.createClass ({
       this._out = v1 + (v2 - v1) * d;
     }
     
-    this.propagateChange ('out');
+    return true;
   }
 });
 
@@ -105,9 +118,9 @@ var Vector2D = vs.core.createClass ({
     this._values = [];
   },
   
-  propertiesDidChange: function ()
+  compute: function ()
   {
-    if (!vs.util.isNumber (this._tick)) return;
+    if (!vs.util.isNumber (this._tick)) return false;
     
     var
       nb_values = this._values.length - 1, // int [0, n]
@@ -127,7 +140,7 @@ var Vector2D = vs.core.createClass ({
       ]
     }
     
-    this.propagateChange ('out');
+    return true;
   }
 });
 
@@ -170,9 +183,9 @@ var Circular2D = vs.core.createClass ({
     this._center = [0, 0];
   },
   
-  propertiesDidChange: function ()
+  compute: function ()
   {
-    if (!vs.util.isNumber (this._tick)) return;
+    if (!vs.util.isNumber (this._tick)) return false;
     
     var
       angle, values = this._values, 
@@ -204,6 +217,15 @@ var Circular2D = vs.core.createClass ({
         
     this._out = [x, y];
     
-    this.propagateChange ('out');
+    return true;
   }
 });
+
+/********************************************************************
+                      Export
+*********************************************************************/
+/** @private */
+vs.ext.fx.Trajectory = Trajectory;
+vs.ext.fx.Vector1D = Vector1D;
+vs.ext.fx.Vector2D = Vector2D;
+vs.ext.fx.Circular2D = Circular2D;

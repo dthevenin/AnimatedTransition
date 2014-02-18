@@ -276,3 +276,9 @@ var Chronometer = vs.core.createClass ({
     this.__pause_time = Date.now ();
   }
 });
+
+/********************************************************************
+                      Export
+*********************************************************************/
+/** @private */
+vs.ext.fx.Chronometer = Chronometer;

@@ -51,9 +51,9 @@ var StringTrajectory = vs.core.createClass ({
     this._values = [];
   },
   
-  propertiesDidChange: function ()
+  compute: function ()
   {
-    if (!vs.util.isNumber (this._tick)) return;
+    if (!vs.util.isNumber (this._tick)) return false;
     
     var ctx = this._context, start = this._values [0], end = this._values [1];
 
@@ -85,6 +85,6 @@ var StringTrajectory = vs.core.createClass ({
     }
     this._out = ctx.data.join ('');
     
-    this.propagateChange ('out');
+    return true;
   }
 });

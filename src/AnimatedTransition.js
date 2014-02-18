@@ -20,10 +20,10 @@
           
 ******************************************************************************/
 
-exports.AnimationDefaultOption = {
+var AnimationDefaultOption = {
   duration: 300,
   begin: 0,
-  timing: Pace.getEaseInOutPace (),
+  pace: Pace.getLinearPace (),
   steps: 0,
   repeat: 1,
   startClb: null,
@@ -44,11 +44,10 @@ exports.AnimationDefaultOption = {
  *  @param property {String} the property name to instrument
  *  @param options {Object} Animation options [optional]
 **/
-exports.animateTransition = function (obj, property, options)
+var animateTransition = function (obj, property, options)
 {
   var animOptions = vs.util.clone (AnimationDefaultOption);
-  if (options)
-  {
+  if (options) {
     for (var key in options) animOptions [key] = options [key];
   }
   
@@ -57,20 +56,26 @@ exports.animateTransition = function (obj, property, options)
   var traj = animOptions.trajectory;
 
   chrono.__clb = function (i) {
-    pace.tickIn = i;
-    pace.propertiesDidChange ();
+  
+    pace._tick_i = i;
+    if (pace._timing) {
+      pace._tick_out = pace._timing (i);
+    }
+    else {
+      pace._tick_out = pace._tick_in;
+    }
     
-    traj.tick = pace.tickOut;
-    traj.propertiesDidChange ();
-    
-    obj [property] = traj.out;
-    obj.propertyChange ();
+    traj._tick = pace._tick_out;
+    if (traj.compute ()) {
+      obj [property] = traj._out;
+      obj.propertyChange ();
+    }
   }
   
   return chrono;
 }
 
-exports.animateTransitionBis = function (obj, srcs, targets, options)
+var animateTransitionBis = function (obj, srcs, targets, options)
 {
   if (!vs.util.isArray (srcs) || !vs.util.isArray (targets)) return;
   if (srcs.length !== targets.length) return;
@@ -98,3 +103,12 @@ exports.animateTransitionBis = function (obj, srcs, targets, options)
   
   return chrono;
 }
+
+/********************************************************************
+                      Export
+*********************************************************************/
+/** @private */
+vs.ext.fx.AnimationDefaultOption = AnimationDefaultOption;
+vs.ext.fx.animateTransition = animateTransition;
+vs.ext.fx.animateTransitionBis = animateTransitionBis;
+
