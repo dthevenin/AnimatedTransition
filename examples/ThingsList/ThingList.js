@@ -30,9 +30,7 @@ var ThingList = vs.core.createClass ({
     this.add (this.config_panel);
     this.config_panel.hide ();
     
-    this.buildList ();
-    
-    window.app = this;
+    this.buildList ();;
   },
   
   openSettings: function () {    
@@ -60,7 +58,7 @@ var ThingList = vs.core.createClass ({
     this.nav_bar.add (title);
 
     var button = new vs.ui.Button ({
-      template: '<span class="fui-menu-24"></span>'
+      template: '<span class="settings"></span>'
     }).init ();
     this.nav_bar.add (button);
     

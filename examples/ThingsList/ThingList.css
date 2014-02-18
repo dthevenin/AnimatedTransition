@@ -2,18 +2,26 @@
   font-family: arial;
 }
 
-.vs_ui_navbar.black {
+.vs_ui_navigationbar.black {
   background-color: #444;
   border-radius: 8px 8px 0px 0;
 }
 
-.vs_ui_navbar .fui-menu-24 {
+.vs_ui_navigationbar .settings {
   color: white;
   font-size: 25px;
-  padding: 10px;
+  width: 30px;
+  height: 30px;
+  margin: 8px;
+  padding: 3px;
 }
 
-.vs_ui_navbar .title{
+.vs_ui_navigationbar .settings::before {
+  font-family: 'FontAwesome';
+  content: "\f0c9";
+}
+
+.vs_ui_navigationbar .title{
   text-align: center;
   color: white;
   font-size: 22px;
@@ -33,7 +41,6 @@
   font-weight: bold;
   color: black;
 }
-
 
 .config_panel {
   top: 44px; bottom: 0px;
@@ -63,6 +70,17 @@
   height: 100px;
   margin: 20px;
   position: absolute;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+}
+
+.config_panel > div > .icon > * {
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
 }
 
 .config_panel > div > .icon > div {

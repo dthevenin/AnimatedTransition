@@ -16,48 +16,47 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var Animations = vs.core.createClass ({
+var Boulier = vs.core.createClass ({
 
   /** parent class */
   parent: vs.ui.Application,
 
   applicationStarted : function (event) {
   
-    this.ball1 = new vs.ui.View ({id:'ball1'}).init ();
-    this.ball2 = new vs.ui.View ({id:'ball4'}).init ();
-    
+    this.ball1 = new vs.ui.View ({
+      id:'ball1',
+      transformOrigin : [25, -200]
+    }).init ();
+
+    this.ball2 = new vs.ui.View ({
+      id:'ball4',
+      transformOrigin : [25, -200]
+    }).init ();
+
     function getPace () { return new Pace ({
-        timing: cubicBezierTransition (0.035, 0.715, 0.96, 0.235)
-      }).init ()
+        timing: vs.cubicBezierTransition (.43,.75,.67,.22)
+      }).init ();
     };
 
-    this.anim1 = animateTransition (this.ball1, 'translation', {
-      duration: 400,
+    this.anim1 = vs.ext.fx.animateTransition (this.ball1, 'rotation', {
+      duration: 600,
       pace: getPace (),
-      trajectory: new Circular2D ({
-        center: [0,-200],
-        values: [45, 55, 45]
-      }).init ()
+      trajectory: new vs.ext.fx.Vector1D ({ values: [0, 40, 0] }).init ()
     });
     
-    this.anim2 = animateTransition (this.ball2, 'translation', {
-      duration: 400,
+    this.anim2 = vs.ext.fx.animateTransition (this.ball2, 'rotation', {
+      duration: 600,
       pace: getPace (),
-      trajectory: new Circular2D ({
-        center: [0,-200],
-        values: [45, 35, 45]
-      }).init ()
+      trajectory: new vs.ext.fx.Vector1D ({ values: [0, -40, 0] }).init ()
     });
     
-   var seq = vs.seq (this.anim1, this.anim2);
-   seq.delegate = {
-     taskDidEnd: function () {seq.start ()}
-   }
-   seq.start ();
+    var seq = vs.seq (this.anim1, this.anim2);
+    seq.delegate = { taskDidEnd: function () {seq.start ();} }
+    seq.start ();
   },
 });
 
 function loadApplication () {
-  new Animations ({id:"animations", layout:vs.ui.View.ABSOLUTE_LAYOUT}).init ();
+  new Boulier ({id:"boulier", layout:vs.ui.View.ABSOLUTE_LAYOUT}).init ();
   vs.ui.Application.start ();
 }

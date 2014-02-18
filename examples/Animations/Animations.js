@@ -62,7 +62,7 @@ var Animations = vs.core.createClass ({
     this.item4.position = [20, 320];
 
 
-    this.anim2 = animateTransition (this.item2, 'rotation', {
+    this.anim2 = vs.ext.fx.animateTransition (this.item2, 'rotation', {
       duration: 5000,
       pace: Pace.getLinearPace (),
  //     steps: 10,
@@ -70,7 +70,7 @@ var Animations = vs.core.createClass ({
       trajectory: new Vector1D ({values: [0, 200, 90, 700]}).init ()
     });
 
-    this.anim3 = animateTransition (
+    this.anim3 = vs.ext.fx.animateTransition (
       this.item3, 
       'translation',
       {
@@ -83,7 +83,7 @@ var Animations = vs.core.createClass ({
       }
     );
 
-    this.anim4 = animateTransition (this.item4, 'text', {
+    this.anim4 = vs.ext.fx.animateTransition (this.item4, 'text', {
       duration: 5000,
       pace: Pace.getLinearPace (),
  //     steps: 10,
@@ -130,28 +130,4 @@ function loadApplication () {
   new Animations ({id:"animations", layout:vs.ui.View.ABSOLUTE_LAYOUT}).init ();
 
   vs.ui.Application.start ();
-}
-
-
-vs.ui.View.prototype._applyTransformation = function ()
-{
-  var
-    matrix = this.getCTM (),
-    transform = matrix.myToString ();
-
-  if (this._magnet === 5)
-  {
-    transform += " translate(-50%,-50%)";
-  }
-  
-  vs.util.setElementTransform (this.view, transform);
-  delete (matrix);
-}
-
-vs.CSSMatrix.prototype.myToString = function () {
-  var points = [this.m11, this.m12, this.m13, this.m14,
-        this.m21, this.m22, this.m23, this.m24,
-        this.m31, this.m32, this.m33, this.m34,
-        this.m41, this.m42, this.m43, this.m44];
-  return "matrix3d(" + points.join(", ") + ")";
 }

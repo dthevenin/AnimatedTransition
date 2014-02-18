@@ -18,7 +18,7 @@
  
 var AnimVector = vs.core.createClass ({
 
-  parent: Trajectory,
+  parent: vs.ext.fx.Trajectory,
   
   _translations: null,
   _translation: 0,
@@ -91,13 +91,11 @@ var AnimVector = vs.core.createClass ({
     }
   },
   
-  propertiesDidChange: function ()
+  compute: function ()
   {
     if (!vs.util.isNumber (this._tick)) return;
     
     this._compute_translate ();
     this._compute_scaling ();
-    
-    this.propagateChange ();
   }
 });

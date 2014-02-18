@@ -1,17 +1,3 @@
-.ball {
-  position: absolute;
-  top: 300px;
-
-  height: 50px;
-  width: 50px;
-  border-radius: 25px;
-  background:
-    url(assets/wood.png),
-    -webkit-radial-gradient(rgb(80, 64, 49), rgb(15, 15, 15));
-    
-  box-shadow: 6px 2px 15px rgba(0,0,0,0.5);
-}
-
 .disks {
   height:400px;
   width:400px;
@@ -19,8 +5,14 @@
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
 }
+
 .disks > div {
   position: absolute;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
 }
 
 #disk3 {

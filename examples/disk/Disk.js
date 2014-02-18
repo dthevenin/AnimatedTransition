@@ -22,6 +22,19 @@ var Animations = vs.core.createClass ({
   parent: vs.ui.Application,
 
   applicationStarted : function (event) {
+  
+    // generate random trajectory
+    function generateTrajectory () {
+      //[0, 190, 70, -45, -125, -60, 0, 45, 0]
+      var values = [], i = 0;
+      values.push (0);
+      for (; i < 5; i++) {
+        values.push (Math.floor (Math.random () * 360 - 180));
+      }
+      values.push (0);
+      console.log (values)
+      return new Vector1D ({values: values}).init ();
+    }
 
     function createAnime (id) {
     
@@ -32,7 +45,7 @@ var Animations = vs.core.createClass ({
         duration: dur,
         pace: Pace.getEaseInOutPace (),
         repeat: 5,
-        trajectory: new Vector1D ({values: [0, 190, 70, -45, -125, -60, 0, 45, 0]}).init ()
+        trajectory: generateTrajectory ()
       });
 
       return anim;
@@ -46,15 +59,24 @@ var Animations = vs.core.createClass ({
     );
     anim.start ();
     
-    // click or tap to restart the animation
+    // click or tap to pause/restart the animation
     this.bind (vs.core.POINTER_START, this, function () {
-      anim.start ();
+      switch (anim.state) {
+        case vs.core.Task.STARTED:
+          anim.pause ();
+        break;
+        
+        case vs.core.Task.PAUSED:
+        case vs.core.Task.STOPPED:
+          anim.start ();
+        break;
+        
+      }
     });
   },
 });
 
 function loadApplication () {
-  new Animations ({id:"animations", layout:vs.ui.View.ABSOLUTE_LAYOUT}).init ();
-
+  new Animations ({id:"disks", layout:vs.ui.View.ABSOLUTE_LAYOUT}).init ();
   vs.ui.Application.start ();
 }

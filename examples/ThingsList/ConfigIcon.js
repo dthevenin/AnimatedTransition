@@ -22,10 +22,10 @@ var ConfigIcon = vs.core.createClass ({
   parent: vs.ui.View,
   
   template:
-'<div class="icon"> \
-  <div class="img ${type}"></div> \
-  <p class="title">${name}</p> \
-</div>',
+"<div class=\"icon\"> \
+  <div class=\"img ${type}\"></div> \
+  <p class=\"title\">${name}</p> \
+</div>",
   
   initComponent: function () {
     this._super ();
@@ -33,7 +33,7 @@ var ConfigIcon = vs.core.createClass ({
     this.img = new vs.ui.View ({
       node: this.view.querySelector ('div'),
       minScale: 0,
-      scaling: 0
+      scaling: 0,
     }).init ();
     
     this.title = new vs.ui.View ({

@@ -71,7 +71,7 @@ var ConfigPanel = vs.core.createClass ({
       icon.title.translation = vector;
        
       // show icon title animation
-      anims.push (animateTransitionBis (icon.title, properties, properties, {
+      anims.push (vs.ext.fx.animateTransitionBis (icon.title, properties, properties, {
         duration: 800,
         pace: Pace.getEaseInPace (),
         trajectory: new AnimVector ({
@@ -81,7 +81,7 @@ var ConfigPanel = vs.core.createClass ({
       }));
 
       // hide icon title animation
-      anims_invert.push (animateTransitionBis (icon.title, properties, properties, {
+      anims_invert.push (vs.ext.fx.animateTransitionBis (icon.title, properties, properties, {
         duration: 600,
         pace: Pace.getEaseInPace (),
         trajectory: new AnimVector ({
@@ -92,7 +92,7 @@ var ConfigPanel = vs.core.createClass ({
 
       var start = Math.floor (i/3) * 250;
       // show icon image animation
-      anims.push (animateTransition (icon.img, 'scaling', {
+      anims.push (vs.ext.fx.animateTransition (icon.img, 'scaling', {
         begin: start,
         duration: 300,
         pace: Pace.getEaseInPace (),
@@ -102,7 +102,7 @@ var ConfigPanel = vs.core.createClass ({
       }));
       
       // hide icon image animation
-      anims_invert.push (animateTransition (icon.img, 'scaling', {
+      anims_invert.push (vs.ext.fx.animateTransition (icon.img, 'scaling', {
         begin: start,
         duration: 300,
         pace: Pace.getEaseInPace (),
