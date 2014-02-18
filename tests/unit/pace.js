@@ -1,6 +1,6 @@
 function testPaceNew ()
 {
-  var p1 = new Pace ().init ();
+  var p1 = new vs.ext.fx.Pace ().init ();
   
   assertNotUndefined ('testPaceNew 1', p1);
   assertEquals ('testPaceNew 2', 0, p1._tick_in);
@@ -9,7 +9,7 @@ function testPaceNew ()
 
 function testLinearPaceNew ()
 {
-  var p1 = Pace.getLinearPace ();
+  var p1 = vs.ext.fx.Pace.getLinearPace ();
   
   assertEquals ('testLinearPaceNew 1', 0, p1.tickOut);
   p1.tickIn = 1; p1.compute ();
@@ -24,7 +24,7 @@ function testLinearPaceNew ()
 
 function testgetEaseInPaceNew ()
 {
-  var p1 = Pace.getEaseInPace ();
+  var p1 = vs.ext.fx.Pace.getEaseInPace ();
   
   assertEquals ('testgetEaseInPaceNew 1', 0, p1.tickOut);
   p1.tickIn = 1; p1.compute ();
